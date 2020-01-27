@@ -1,5 +1,7 @@
 package com.wbl;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -46,8 +48,16 @@ public class WblBookDownload {
 		
 		driver.findElement(By.xpath("//*[@id=\"books\"]/div/div/div/div/table/tbody/tr[9]/td[2]/a")).click();
 		
-		driver.navigate().to("https://drive.google.com/u/0/uc?id=0B2Z9J2D1hx7UM0xnRkF3aG5mZ0E&export=download");
-		Thread.sleep(5000);
+		//driver.navigate().to("https://drive.google.com/u/0/uc?id=0B2Z9J2D1hx7UM0xnRkF3aG5mZ0E&export=download");
+		//Thread.sleep(5000);
+		Set<String> windowsCount = driver.getWindowHandles();
+		Iterator<String> itr = windowsCount.iterator();
+		
+		String parentId=itr.next();
+		String childId=itr.next();
+		
+		driver.switchTo().window(childId);
+		driver.findElement(By.xpath("/html/body/div[3]/div[3]/div/div[3]/div[2]/div[2]/div[3]/div")).click();
 	}
 	
 	
